@@ -254,19 +254,20 @@ function getNextFridayThe13th(date) {
     month += 1;
   }
 
-  while (true) {
-    const next13th = new Date(year, month, 13);
+  let next13th;
+  do {
+    next13th = new Date(year, month, 13);
 
-    if (next13th.getDay() === 5) {
-      return next13th;
+    if (next13th.getDay() !== 5) {
+      month += 1;
+      if (month > 11) {
+        month = 0;
+        year += 1;
+      }
     }
+  } while (next13th.getDay() !== 5);
 
-    month += 1;
-    if (month > 11) {
-      month = 0;
-      year += 1;
-    }
-  }
+  return next13th;
 }
 
 /**
